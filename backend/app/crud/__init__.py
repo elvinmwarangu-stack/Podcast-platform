@@ -6,6 +6,9 @@ from .user import (
     get_user_by_username,
     authenticate_user,
     update_user,
+    reset_password,
+    create_reset_token,
+    reset_password_with_token,
 )
 from .podcast import (
     get_podcast,

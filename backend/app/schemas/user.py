@@ -7,16 +7,29 @@ class UserBase(BaseModel):
     username: str
 
 class UserCreate(UserBase):
-    password: str = Field(..., min_length=8, description="Minimum 8 characters")
+    password: str
     full_name: Optional[str] = None
 
 class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
     full_name: Optional[str] = None
+    profile_photo: Optional[str] = None
+
+class PasswordReset(BaseModel):
+    current_password: str
+    new_password: str = Field(..., min_length=8)
+
+class PasswordResetRequest(BaseModel):
+    email: EmailStr
+
+class PasswordResetConfirm(BaseModel):
+    token: str
+    new_password: str = Field(..., min_length=8)
 
 class UserOut(UserBase):
     id: int
     full_name: Optional[str]
+    profile_photo: Optional[str]
     is_active: bool
     created_at: datetime
 

@@ -46,3 +46,26 @@ def login(
         )
     access_token = create_access_token(data={"sub": user.username})
     return {"access_token": access_token, "token_type": "bearer"}
+
+
+@router.post("/forgot-password")
+def forgot_password(
+    request: schemas.PasswordResetRequest,
+    db: Session = Depends(get_db),
+):
+    token = crud.create_reset_token(db, request.email)
+    if token:
+        reset_link = f"http://localhost:5173/reset-password?token={token}"
+        print(f"Password reset link: {reset_link}")
+    return {"message": "If email exists, reset link has been sent"}
+
+
+@router.post("/reset-password")
+def reset_password_confirm(
+    request: schemas.PasswordResetConfirm,
+    db: Session = Depends(get_db),
+):
+    user = crud.reset_password_with_token(db, request.token, request.new_password)
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
+    return {"message": "Password reset successful"}
