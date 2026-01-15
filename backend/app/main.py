@@ -17,16 +17,19 @@ app = FastAPI(
     version="0.1.0"
 )
 
-# Allow frontend to connect (update origins later for production)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],           # Change to your frontend URL in production
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://*.vercel.app",
+        "https://your-app-name.vercel.app",  # Update with your Vercel URL
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Include all routers
 app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
 app.include_router(users_router, prefix="/users", tags=["Users"])
 app.include_router(podcasts_router, prefix="/podcasts", tags=["Podcasts"])

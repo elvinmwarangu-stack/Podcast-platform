@@ -31,24 +31,10 @@ def get_podcast_detail(
 
 @router.post("/", response_model=schemas.PodcastOut, status_code=201)
 def create_podcast(
-    title: str = Form(...),
-    description: Optional[str] = Form(None),
-    category_id: int = Form(...),
-    audio_file: UploadFile = File(...),
+    podcast_create: schemas.PodcastCreate,
     current_user: User = Depends(get_current_active_user),
     db: Session = Depends(get_db),
 ):
-    # In real app: save file → get URL (local / S3 / Cloudinary)
-    # For now we fake it
-    audio_url = f"/uploads/{audio_file.filename}"
-
-    podcast_create = schemas.PodcastCreate(
-        title=title,
-        description=description,
-        category_id=category_id,
-        audio_url=audio_url,
-    )
-
     return crud.create_podcast(db, podcast_create, owner_id=current_user.id)
 
 

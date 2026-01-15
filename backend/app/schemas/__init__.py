@@ -1,5 +1,5 @@
 from .user import (
-    UserCreate, UserUpdate, UserOut, Token
+    UserCreate, UserUpdate, UserOut, Token, PasswordReset, PasswordResetRequest, PasswordResetConfirm
 )
 from .category import CategoryCreate, CategoryOut
 from .podcast import PodcastCreate, PodcastUpdate, PodcastOut
