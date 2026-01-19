@@ -31,6 +31,9 @@ router = APIRouter(tags=["podcasts"])
 # LIST PODCASTS
 @router.get("/", response_model=List[schemas.PodcastOut])
 def list_podcasts(
+    skip: int = 0,                     
+    limit: int = 20,                   
+    db: Session = Depends(get_db),     
 ):
     """
     Returns a list of podcasts with optional pagination.
