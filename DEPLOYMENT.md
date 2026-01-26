@@ -1,4 +1,4 @@
-# 🚀 Deployment Guide
+# Deployment Guide
 
 ## Backend (Render)
 
@@ -38,7 +38,7 @@ In your web service settings:
 ### Step 5: Seed Database
 1. Go to your web service → "Shell"
 2. Run: `python3 seed_data.py`
-3. Done! ✅
+3. Done! 
 
 ### Your Backend URL:
 `https://your-app-name.onrender.com`
@@ -85,7 +85,7 @@ allow_origins=[
 
 ---
 
-## 🎉 Done!
+##  Done!
 
 **Frontend**: https://your-app.vercel.app
 **Backend**: https://your-app-name.onrender.com
